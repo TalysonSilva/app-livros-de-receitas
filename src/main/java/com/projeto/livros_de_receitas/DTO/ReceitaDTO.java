@@ -2,6 +2,7 @@ package com.projeto.livros_de_receitas.DTO;
 
 import com.projeto.livros_de_receitas.model.Ingrediente;
 import com.projeto.livros_de_receitas.model.NivelDificuldade;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,5 +23,7 @@ public record ReceitaDTO(
         int rendimento,
         NivelDificuldade nivelDificuldade,
         @Size(min = 0, max = 5)
-        int estrelas) {
+        int estrelas,
+        @Max(3)
+        List<String> imagens) {
 }

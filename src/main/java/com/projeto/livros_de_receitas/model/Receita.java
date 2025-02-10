@@ -2,6 +2,7 @@ package com.projeto.livros_de_receitas.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,14 +27,18 @@ public class Receita {
 
     private int estrelas;
 
+    @ElementCollection
+    private  List<String> imagens;
+
     public Receita(String nome, List<Ingrediente> ingredientes, int tempoDeCozimento,
-                   int redimento, NivelDificuldade nivelDificuldade, int estrelas) {
+                   int redimento, NivelDificuldade nivelDificuldade, int estrelas, List<String> imagens) {
         this.nome = nome;
         this.ingredientes = ingredientes;
         this.tempoDeCozimento = tempoDeCozimento;
         this.redimento = redimento;
         this.nivelDificuldade = nivelDificuldade;
         this.estrelas = estrelas;
+        this.imagens = imagens;
     }
      public Receita (){
 
@@ -81,6 +86,14 @@ public class Receita {
 
     public void setEstrelas(int estrelas) {
         this.estrelas = estrelas;
+    }
+
+    public List<String> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<String> imagens) {
+        this.imagens = imagens;
     }
 
     @Override

@@ -23,9 +23,18 @@ public class ReceitaService {
                 receitaDTO.tempoDeCozimento(),
                 receitaDTO.rendimento(),
                 receitaDTO.nivelDificuldade(),
-                receitaDTO.estrelas()
+                receitaDTO.estrelas(),
+                receitaDTO.imagens()
         );
-        // Associar cada ingrediente com a receita
+        List<Ingrediente> ingredientes =  converterDtoEntidadeIngredientes(receitaDTO, novaReceita);
+
+        novaReceita.setIngredientes(ingredientes);
+
+        receitaRepository.save(novaReceita);
+        return "Nova Receita Cadastrado com sucesso";
+    }
+
+    private  List<Ingrediente> converterDtoEntidadeIngredientes(ReceitaDTO receitaDTO, Receita novaReceita) {
         List<Ingrediente> ingredientes = receitaDTO.ingredientes().stream()
                 .map(ingredienteDTO -> {
                     Ingrediente ingrediente = new Ingrediente(
@@ -36,11 +45,8 @@ public class ReceitaService {
                     return ingrediente;
                 })
                 .collect(Collectors.toList());
+        return ingredientes;
 
-        novaReceita.setIngredientes(ingredientes);
-
-        receitaRepository.save(novaReceita);
-        return "Nova Receita Cadastrado com sucesso";
     }
 
 
