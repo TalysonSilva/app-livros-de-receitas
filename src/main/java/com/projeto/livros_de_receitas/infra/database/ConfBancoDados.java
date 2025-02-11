@@ -1,10 +1,9 @@
-package com.projeto.livros_de_receitas.infra;
+package com.projeto.livros_de_receitas.infra.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.sqlite.SQLiteDataSource;
 
 import javax.sql.DataSource;

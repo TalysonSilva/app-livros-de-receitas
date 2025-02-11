@@ -2,7 +2,6 @@ package com.projeto.livros_de_receitas.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 
 import java.util.List;
 import java.util.Objects;

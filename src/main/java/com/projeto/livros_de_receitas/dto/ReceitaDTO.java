@@ -1,4 +1,4 @@
-package com.projeto.livros_de_receitas.DTO;
+package com.projeto.livros_de_receitas.dto;
 
 import com.projeto.livros_de_receitas.model.Ingrediente;
 import com.projeto.livros_de_receitas.model.NivelDificuldade;

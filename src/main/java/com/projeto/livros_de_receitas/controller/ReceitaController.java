@@ -1,6 +1,6 @@
 package com.projeto.livros_de_receitas.controller;
 
-import com.projeto.livros_de_receitas.DTO.ReceitaDTO;
+import com.projeto.livros_de_receitas.dto.ReceitaDTO;
 import com.projeto.livros_de_receitas.model.Receita;
 import com.projeto.livros_de_receitas.repository.ReceitaRepository;
 import com.projeto.livros_de_receitas.service.ReceitaService;
