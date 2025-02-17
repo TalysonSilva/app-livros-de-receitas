@@ -19,4 +19,5 @@ public class ConfBancoDados {
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
         return dataSource;
     }
+
 }
