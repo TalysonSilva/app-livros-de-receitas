@@ -34,4 +34,9 @@ public class ReceitaController {
         return new ResponseEntity<>(receitas, HttpStatus.OK );
     }
 
+    @DeleteMapping("/excluir")
+    public ResponseEntity apagarReceita(){
+
+    }
+
 }

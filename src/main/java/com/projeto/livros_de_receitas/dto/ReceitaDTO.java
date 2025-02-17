@@ -22,8 +22,6 @@ public record ReceitaDTO(
         @Min(1)
         int rendimento,
         NivelDificuldade nivelDificuldade,
-        @Size(min = 0, max = 5)
-        int estrelas,
         @Max(3)
         List<String> imagens) {
 }
