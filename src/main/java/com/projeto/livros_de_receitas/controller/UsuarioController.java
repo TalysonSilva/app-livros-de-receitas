@@ -4,6 +4,7 @@ import com.projeto.livros_de_receitas.dto.CadastrarNovoUsuario;
 import com.projeto.livros_de_receitas.dto.LoginUsuarioDTO;
 import com.projeto.livros_de_receitas.dto.ResponseLoginDTO;
 import com.projeto.livros_de_receitas.infra.security.TokenService;
+
 import com.projeto.livros_de_receitas.model.Usuario;
 import com.projeto.livros_de_receitas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(("/api/usuario"))
+@RequestMapping(("api/usuario"))
 public class UsuarioController {
 
     @Autowired
@@ -26,14 +28,13 @@ public class UsuarioController {
     @Autowired
     private TokenService service;
 
-
     @PostMapping("/login")
     public ResponseEntity autenticacaoUsuario(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
         Usuario usuario = repository.findByEmail(loginUsuarioDTO.email()).orElseThrow(()
                 -> new RuntimeException("Usuario não encotrado"));
 
         if (passwordEncoder.matches(loginUsuarioDTO.senha(), usuario.getSenha())) {
-            String token = service.gerandoToken(usuario);
+            java.lang.String token = service.gerandoToken(usuario);
             return  ResponseEntity.ok( new ResponseLoginDTO(token, usuario.getNome()));
         }
 
@@ -54,7 +55,7 @@ public class UsuarioController {
 
          repository.save(novoUsuario);
 
-         String token = service.gerandoToken(novoUsuario);
+         java.lang.String token = service.gerandoToken(novoUsuario);
          return  ResponseEntity.ok( new ResponseLoginDTO(token, novoUsuario.getNome()));
 
         }
