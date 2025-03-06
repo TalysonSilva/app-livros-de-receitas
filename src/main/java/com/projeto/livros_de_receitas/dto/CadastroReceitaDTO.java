@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
-public record ReceitaDTO(
+public record CadastroReceitaDTO(
         @NotNull
         @Size(min = 4, max = 100)
         String nome,
@@ -23,5 +23,7 @@ public record ReceitaDTO(
         int rendimento,
         NivelDificuldade nivelDificuldade,
         @Max(3)
-        List<String> imagens) {
+        List<String> imagens,
+        String emailUsuario)
+{
 }

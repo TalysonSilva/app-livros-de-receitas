@@ -1,9 +1,11 @@
 package com.projeto.livros_de_receitas.service;
 
-import com.projeto.livros_de_receitas.dto.ReceitaDTO;
+import com.projeto.livros_de_receitas.dto.CadastroReceitaDTO;
 import com.projeto.livros_de_receitas.model.Ingrediente;
 import com.projeto.livros_de_receitas.model.Receita;
+import com.projeto.livros_de_receitas.model.Usuario;
 import com.projeto.livros_de_receitas.repository.ReceitaRepository;
+import com.projeto.livros_de_receitas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +17,24 @@ public class ReceitaService {
 
     @Autowired
     private  ReceitaRepository receitaRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    public String cadastrarNovaReceita(ReceitaDTO receitaDTO) {
+    public String cadastrarNovaReceita(CadastroReceitaDTO cadastroReceitaDTO) {
         Receita novaReceita = new Receita(
-                receitaDTO.nome(),
-                receitaDTO.ingredientes(),
-                receitaDTO.tempoDeCozimento(),
-                receitaDTO.rendimento(),
-                receitaDTO.nivelDificuldade(),
-                receitaDTO.estrelas(),
-                receitaDTO.imagens()
+                cadastroReceitaDTO.nome(),
+                cadastroReceitaDTO.ingredientes(),
+                cadastroReceitaDTO.tempoDeCozimento(),
+                cadastroReceitaDTO.rendimento(),
+                cadastroReceitaDTO.nivelDificuldade(),
+                cadastroReceitaDTO.imagens(),
+                cadastroReceitaDTO.emailUsuario()
         );
-        List<Ingrediente> ingredientes =  converterDtoEntidadeIngredientes(receitaDTO, novaReceita);
+
+          Usuario usuario = usuarioRepository.findByEmail(cadastroReceitaDTO.emailUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+
+        List<Ingrediente> ingredientes =  converterDtoEntidadeIngredientes(cadastroReceitaDTO, novaReceita);
 
         novaReceita.setIngredientes(ingredientes);
 
@@ -34,8 +42,8 @@ public class ReceitaService {
         return "Nova Receita Cadastrado com sucesso";
     }
 
-    private  List<Ingrediente> converterDtoEntidadeIngredientes(ReceitaDTO receitaDTO, Receita novaReceita) {
-        List<Ingrediente> ingredientes = receitaDTO.ingredientes().stream()
+    private  List<Ingrediente> converterDtoEntidadeIngredientes(CadastroReceitaDTO cadastroReceitaDTO, Receita novaReceita) {
+        List<Ingrediente> ingredientes = cadastroReceitaDTO.ingredientes().stream()
                 .map(ingredienteDTO -> {
                     Ingrediente ingrediente = new Ingrediente(
                             ingredienteDTO.getNome(),
