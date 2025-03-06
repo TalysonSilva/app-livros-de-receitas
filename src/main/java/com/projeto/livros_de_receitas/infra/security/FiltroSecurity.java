@@ -1,5 +1,6 @@
 package com.projeto.livros_de_receitas.infra.security;
 
+
 import com.projeto.livros_de_receitas.model.Usuario;
 import com.projeto.livros_de_receitas.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
@@ -32,7 +33,7 @@ public class FiltroSecurity extends OncePerRequestFilter {
 
         if (login != null) {
             Usuario usuario = usuarioRepository.findByEmail(login).orElseThrow(()
-                    -> new RuntimeException("Usuario não encotrado"));
+                    -> new RuntimeException("Usuario  não encontrado"));
             var autorizacao = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USUARIO"));
             var autenticacao = new UsernamePasswordAuthenticationToken(usuario, null, autorizacao );
             SecurityContextHolder.getContext().setAuthentication(autenticacao);
@@ -41,7 +42,7 @@ public class FiltroSecurity extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String recuperarToken(HttpServletRequest request) {
+    private java.lang.String recuperarToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
