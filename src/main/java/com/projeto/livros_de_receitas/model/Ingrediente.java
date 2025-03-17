@@ -9,13 +9,13 @@ public class Ingrediente {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String nome;
-    private int quantidade;
+    private String quantidade;
 
     @ManyToOne
     @JoinColumn(name = "receita_id")
     @JsonBackReference
     private Receita receita;
-    public Ingrediente(String nome, int quantidade) {
+    public Ingrediente(String nome, String quantidade) {
         this.nome = nome;
         this.quantidade = quantidade;
     }
@@ -36,11 +36,11 @@ public class Ingrediente {
         this.nome = nome;
     }
 
-    public int getQuantidade() {
+    public String getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
     }
 

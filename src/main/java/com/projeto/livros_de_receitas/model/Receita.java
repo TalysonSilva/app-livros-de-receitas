@@ -9,10 +9,11 @@ import java.util.List;
 public class Receita {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private java.lang.String id;
+    private String id;
 
-    private java.lang.String nome;
+    private String nome;
 
+    private String modoPreparo;
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Ingrediente> ingredientes;
@@ -28,11 +29,11 @@ public class Receita {
     private int estrelas;
 
     @ElementCollection
-    private  List<java.lang.String> imagens;
+    private  List<String> imagens;
 
-    public Receita(java.lang.String nome, List<Ingrediente> ingredientes, int tempoDeCozimento,
+    public Receita(String nome, List<Ingrediente> ingredientes, int tempoDeCozimento,
                    int rendimento, NivelDificuldade nivelDificuldade,
-                   List<java.lang.String> imagens, String emailUsuario) {
+                   List<String> imagens, String emailUsuario, String modoPreparo) {
         this.nome = nome;
         this.ingredientes = ingredientes;
         this.tempoDeCozimento = tempoDeCozimento;
@@ -40,16 +41,28 @@ public class Receita {
         this.nivelDificuldade = nivelDificuldade;
         this.imagens = imagens;
         this.emailUsuario = emailUsuario;
+        this.modoPreparo = modoPreparo;
     }
 
     public Receita (){}
 
+    public Receita (int estrelas) {
+        this.estrelas = estrelas;
+    }
 
-    public java.lang.String getId() {
+    public String getModoPreparo() {
+        return modoPreparo;
+    }
+
+    public void setModoPreparo(String modoPreparo) {
+        this.modoPreparo = modoPreparo;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public java.lang.String getNome() {
+    public String getNome() {
         return nome;
     }
 
@@ -66,7 +79,7 @@ public class Receita {
     }
 
 
-    public void setNome(java.lang.String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -82,11 +95,11 @@ public class Receita {
         this.rendimento = rendimento;
     }
 
-    public List<java.lang.String> getImagens() {
+    public List<String> getImagens() {
         return imagens;
     }
 
-    public void setImagens(List<java.lang.String> imagens) {
+    public void setImagens(List<String> imagens) {
         this.imagens = imagens;
     }
 

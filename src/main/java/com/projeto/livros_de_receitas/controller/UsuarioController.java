@@ -35,7 +35,7 @@ public class UsuarioController {
 
         if (passwordEncoder.matches(loginUsuarioDTO.senha(), usuario.getSenha())) {
             java.lang.String token = service.gerandoToken(usuario);
-            return  ResponseEntity.ok( new ResponseLoginDTO(token, usuario.getNome()));
+            return  ResponseEntity.ok( new ResponseLoginDTO(token, usuario.getEmail(), usuario.getNome()));
         }
 
         return ResponseEntity.badRequest().build();
@@ -56,7 +56,7 @@ public class UsuarioController {
          repository.save(novoUsuario);
 
          java.lang.String token = service.gerandoToken(novoUsuario);
-         return  ResponseEntity.ok( new ResponseLoginDTO(token, novoUsuario.getNome()));
+         return  ResponseEntity.ok( new ResponseLoginDTO(token, novoUsuario.getEmail(), novoUsuario.getNome()));
 
         }
 

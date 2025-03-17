@@ -14,7 +14,7 @@ public record CadastroReceitaDTO(
         @Size(min = 4, max = 100)
         String nome,
         @NotNull
-        @Min(1)
+        @Min(2)
         List<Ingrediente> ingredientes,
         @NotNull
         @Min(1)
@@ -24,6 +24,8 @@ public record CadastroReceitaDTO(
         NivelDificuldade nivelDificuldade,
         @Max(3)
         List<String> imagens,
+        @NotNull
+        String modoPreparo,
         String emailUsuario)
 {
 }
